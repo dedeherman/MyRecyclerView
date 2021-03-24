@@ -34,3 +34,4 @@ class ListHeroAdapter(private val listHero: ArrayList<Hero>) : RecyclerView.Adap
         }
     }
 }
+//tes
