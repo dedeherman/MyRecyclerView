@@ -1,8 +1,10 @@
 package com.dede.myrecyclerview
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dede.myrecyclerview.databinding.ActivityMainBinding
 
@@ -42,5 +44,35 @@ class MainActivity : AppCompatActivity() {
         binding.rvHeroes.layoutManager = LinearLayoutManager(this)
         val listHeroAdapter = ListHeroAdapter(list)
         binding.rvHeroes.adapter = listHeroAdapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        setMode(item.itemId)
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setMode(selectedMode: Int) {
+        when(selectedMode) {
+            R.id.action_list -> {
+                showRecyclerList()
+            }
+            R.id.action_grid -> {
+                showRecyclerGrid()
+            }
+            R.id.action_cardview -> {
+
+            }
+        }
+    }
+
+    private fun showRecyclerGrid() {
+        binding.rvHeroes.layoutManager = GridLayoutManager(this, 2)
+        val gridHeroAdapter = GridHeroAdapter(list)
+        binding.rvHeroes.adapter = gridHeroAdapter
     }
 }
